@@ -1,0 +1,106 @@
+{% extends 'layout.html' %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+{% endblock %}
+
+{% block body %}
+<section class="front-page__wrapper">
+    <section class="front-page__wrapper__featured ">
+        <img src="{{ url_for('static', filename='temp/temp_1.png') }}" alt="">
+        <section class="front-page__wrapper__featured__text-container">
+            <h2>Lorem Ipsum</h2>
+            <p>Lorem ipsum, dolor sit amet consectetur adipisicing.</p>
+        </section>
+    </section>
+    <section class="front-page__wrapper__grid">
+
+        <section class="front-page__wrapper__grid__row">
+            
+            <section class="front-page__wrapper__grid__row__item">
+                <img src="{{ url_for('static', filename='temp/temp_1.png') }}" alt="">
+                <section class="front-page__wrapper__grid__row__item__text-container">
+                    <h2>Lorem Ipsum</h2>
+                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing.</p>
+                </section>
+            </section>
+
+            <section class="front-page__wrapper__grid__row__item">
+                <img src="{{ url_for('static', filename='temp/temp_2.png') }}" alt="">
+                <section class="front-page__wrapper__grid__row__item__text-container">
+                    <h2>Lorem Ipsum</h2>
+                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing.</p>
+                </section>
+            </section>
+
+            <section class="front-page__wrapper__grid__row__item">
+                <img src="{{ url_for('static', filename='temp/temp_3.png') }}" alt="">
+                <section class="front-page__wrapper__grid__row__item__text-container">
+                    <h2>Lorem Ipsum</h2>
+                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing.</p>
+                </section>
+            </section>
+
+        </section>
+
+        <section class="front-page__wrapper__grid__row">
+            <section class="front-page__wrapper__grid__row__item">
+                <img src="{{ url_for('static', filename='temp/temp_4.png') }}" alt="">
+                <section class="front-page__wrapper__grid__row__item__text-container">
+                    <h2>Lorem Ipsum</h2>
+                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing.</p>
+                </section>
+            </section>
+
+            <section class="front-page__wrapper__grid__row__item">
+                <img src="{{ url_for('static', filename='temp/temp_5.png') }}" alt="">
+                <section class="front-page__wrapper__grid__row__item__text-container">
+                    <h2>Lorem Ipsum</h2>
+                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing.</p>
+                </section>
+            </section>
+
+            <section class="front-page__wrapper__grid__row__item">
+                <img src="{{ url_for('static', filename='temp/temp_1.png') }}" alt="">
+                <section class="front-page__wrapper__grid__row__item__text-container">
+                    <h2>Lorem Ipsum</h2>
+                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing.</p>
+                </section>
+            </section>
+        </section>
+    </section>
+    <footer>
+        <section class="footer__section">
+            <h3>LENKER</h3>
+            <br>
+            <ul>
+                <li>PERSONVERN</li>
+                <li>ANSATTE</li>
+                <li>KONTAKT</li>
+                <li>REDAKSJONELT</li>
+            </ul>
+        </section>
+        <section class="footer__section">
+            <h3>KONTAKT</h3>
+            <br>
+            <ul>
+                <li>TELEFON: +47 12341234</li>
+                <li>E-POST: kontakt@avis.no</li>
+                <li>0858, Gateveien 47 OSLO</li>
+                
+            </ul>
+        </section>
+        <section class="footer__section">
+            <h3>KONTAKT</h3>
+            <br>
+            <ul>
+                <li>TELEFON: +47 12341234</li>
+                <li>E-POST: kontakt@avis.no</li>
+                <li>0858, Gateveien 47 OSLO</li>
+                
+            </ul>
+        </section>
+    </footer>
+</section>
+
+{% endblock %}
