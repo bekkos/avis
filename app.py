@@ -4,7 +4,7 @@ import hashlib
 from werkzeug.utils import secure_filename
 import os
 
-UPLOAD_FOLDER = '/static/images'
+UPLOAD_FOLDER = './static/images/'
 ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 
 app = Flask(__name__)
@@ -68,13 +68,21 @@ def cdnControlpanel():
         if file.filename == '':
             flash('No selected file')
             return redirect(request.url)
-        if file and allowed_file(file.filename):
+        if file:
             filename = secure_filename(file.filename)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            return redirect(request.url)
 
     elif request.method == 'GET':
         if session.get('logged_in'):
-            return render_template('cdn.controlpanel.html')
+            directory = r'./static/images/'
+            urls = []
+            for filename in os.listdir(directory):
+                if filename.endswith(".jpg") or filename.endswith(".png") or filename.endswith(".jpeg"):
+                    urls.append(os.path.join(directory, filename))
+                else:
+                    continue
+            return render_template('cdn.controlpanel.html', urls=urls)
 
 
 @app.route('/logout')

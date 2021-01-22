@@ -6,18 +6,41 @@
     <title>Avis</title>
     <link rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/general.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/cdn.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/cdn.controlpanel.css') }}">
+    <script>
+        function copy(value) {
+            let tempInput = document.createElement("input");
+            tempInput.value = value;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand("copy");
+            document.body.removeChild(tempInput);
+        }
+    </script>
 </head>
 <body>
-    <h1>works</h1>
-        {% with messages = get_flashed_messages() %}
-        {% if messages %}
-            <ul class=flashes>
-            {% for message in messages %}
-            <li>{{ message }}</li>
+    <section class="wrapper">
+        <form action="#" method="POST" enctype="multipart/form-data">
+            <input type="file" name="file">
+            <input type="submit">
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <ul class=flashes>
+                {% for message in messages %}
+                <li>{{ message }}</li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+            {% endwith %}
+        </form>
+        <section class="image-grid">
+            {% for url in urls %}
+                <img src="{{ url }}" onClick="copy(this.src);">
             {% endfor %}
-            </ul>
-        {% endif %}
-        {% endwith %}
+        </section>
+    </section>
+
+    
+        
 </body>
 </html>
