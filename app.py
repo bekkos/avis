@@ -95,8 +95,10 @@ def cdnControlpanel():
 
 @app.route("/cdn-editor")
 def cdnEditor():
-    return render_template("cdn.editor.html")
-
+    if session.get('logged_in'):
+        return render_template("cdn.editor.html")
+    else:
+        return redirect(url_for('cdn'))
 @app.route('/article')
 def article():
     return render_template('article_body.html')
