@@ -25,6 +25,14 @@ class User(db.Model):
     passhash = db.Column(db.String)
     name = db.Column(db.String)
 
+class Article(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    author_id = db.Column(db.Integer)
+    featured_image_uri = db.Column(db.String)
+    article_title = db.Column(db.String)
+    article_body = db.Column(db.String)
+
+
 @app.route('/')
 def index():
     return render_template('index.html')
@@ -84,6 +92,14 @@ def cdnControlpanel():
                     continue
             return render_template('cdn.controlpanel.html', urls=urls)
 
+
+@app.route("/cdn-editor")
+def cdnEditor():
+    return render_template("cdn.editor.html")
+
+@app.route('/article')
+def article():
+    return render_template('article_body.html')
 
 @app.route('/logout')
 def logout():
