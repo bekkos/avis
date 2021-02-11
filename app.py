@@ -15,7 +15,7 @@ salt = "kfjwej2849"
 
 
 #DB Config
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite3'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://qhgvwsermimino:79f72da5cc5ca92807334413bee6c19ba90739403d7da342c24e8c43ae663468@ec2-54-72-155-238.eu-west-1.compute.amazonaws.com:5432/df4ai5d5tpa1mo'
 db = SQLAlchemy(app)
 
 #Database
