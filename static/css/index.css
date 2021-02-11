@@ -23,7 +23,7 @@
 
 .front-page__wrapper__featured__text-container {
     width: 60%;
-    height: 100px;
+    min-height: 100px;
     text-align: center;
     position: relative;
     top: -70px;
@@ -82,7 +82,7 @@
 
 .front-page__wrapper__grid__row__item__text-container {
     width: 60%;
-    height: 100px;
+    min-height: 100px;
     text-align: center;
     position: relative;
     bottom: 80px;
