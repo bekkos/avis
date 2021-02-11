@@ -1,6 +1,6 @@
 from flask import Flask, render_template, redirect, url_for, session, request, flash
 from flask_sqlalchemy import SQLAlchemy
-import hashlib
+import hashlib, datetime
 from werkzeug.utils import secure_filename
 import os
 
@@ -25,6 +25,12 @@ class User(db.Model):
     passhash = db.Column(db.String)
     name = db.Column(db.String)
 
+class UserActivity(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer)
+    activity = db.Column(db.String)
+    timestamp = db.Column(db.DateTime, default=datetime.datetime.utcnow)
+
 class Article(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     author_id = db.Column(db.Integer)
@@ -47,6 +53,9 @@ def cdn():
                 if user.passhash == passhash.hexdigest():
                     session['logged_in'] = True
                     session['user_id'] = user.id
+                    activity = UserActivity(user_id=user.id, activity="Logged in to CDN.")
+                    db.session.add(activity)
+                    db.session.commit()
                     return redirect(url_for('cdnControlpanel'))
                 else:
                     flash('Feil epost/passord.')
