@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/cdn.general.css') }}">
+    {% block head %}
+    {% endblock %}
+</head>
+<body>
+    <section class="main-wrapper">
+        <section class="left-box">
+            <section class="profile-preview">
+                <img src="{{ url_for('static', filename='profile-data/bekkos-pp.jpg') }}" alt="">
+                <br>
+                <h2>Martin Isaksen Bekkos</h2>
+                <p>bekkosm@gmail.com</p>
+                <div class="strek"></div>
+            </section>
+            <section class="list-wrapper">
+                <ul>
+                    <li><a href="{{ url_for('cdnEditor') }}">Artikkel-editor</a></li>
+                    <li><a href="{{ url_for('cdnControlpanel') }}">Multimedie-håndtering</a></li>
+                    <li><a href="">Rediger Profil</a></li>
+                </ul>
+            </section>
+        </section>
+        <section class="right-box">
+            {% block body %}
+            {% endblock %}
+        </section>
+    </section>
+    
+</body>
+</html>

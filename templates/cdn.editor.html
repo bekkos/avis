@@ -1,21 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Avis</title>
-    <link rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/general.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/cdn.editor.css') }}">
-    
-</head>
-<body>
-    <section class="wrapper">
-        <textarea name="editor" id="editor" cols="30" rows="10"></textarea>
-    </section>
+{% extends 'cdn.layout.html' %}
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/cdn.editor.css') }}">
+{% endblock %}
+
+{% block body %}
+    <textarea name="editor" id="editor"></textarea>
     <script src="{{ url_for('static', filename='addons/ckeditor/ckeditor.js') }}"></script>
     <script>
         CKEDITOR.replace( 'editor' );
+        CKEDITOR.config.height = document.documentElement.clientHeight-201;
     </script>
-</body>
-</html>
+{% endblock %}
