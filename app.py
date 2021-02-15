@@ -105,7 +105,8 @@ def cdnControlpanel():
 @app.route("/cdn-editor")
 def cdnEditor():
     if session.get('logged_in'):
-        return render_template("cdn.editor.html")
+        print(User.query.filter_by(id=session['user_id']).first().name)
+        return render_template("cdn.editor.html", user=User.query.filter_by(id=session['user_id']).first())
     else:
         return redirect(url_for('cdn'))
 @app.route('/article')

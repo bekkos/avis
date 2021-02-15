@@ -12,10 +12,10 @@
     <section class="main-wrapper">
         <section class="left-box">
             <section class="profile-preview">
-                <img src="{{ url_for('static', filename='profile-data/bekkos-pp.jpg') }}" alt="">
+                <img src="{{ url_for('static', filename='profile-data/'+user.id|string+'.jpg') }}" alt="">
                 <br>
-                <h2>Martin Isaksen Bekkos</h2>
-                <p>bekkosm@gmail.com</p>
+                <h2>{{ user.name }}</h2>
+                <p>{{ user.email }}</p>
                 <div class="strek"></div>
             </section>
             <section class="list-wrapper">
@@ -23,6 +23,7 @@
                     <li><a href="{{ url_for('cdnEditor') }}">Artikkel-editor</a></li>
                     <li><a href="{{ url_for('cdnControlpanel') }}">Multimedie-håndtering</a></li>
                     <li><a href="">Rediger Profil</a></li>
+                    <li><a href="{{ url_for('logout') }}">Logg ut</a></li>
                 </ul>
             </section>
         </section>
