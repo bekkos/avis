@@ -16,6 +16,7 @@ html, body {
 
 .fonts__title {
     font-family: 'Imbue', serif;
+    text-align: center;
 }
 
 .fonts__standard {
