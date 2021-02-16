@@ -1,0 +1,16 @@
+{% extends 'cdn.layout.html' %}
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/cdn.profile.css') }}">
+{% endblock %}
+
+{% block body %}
+<div class="wrapper">
+    <img src="{{ url_for('static', filename='profile-data/'+user.id|string+'.jpg') }}" alt="">
+    <br>
+    <h2>{{ user.name }}</h2>
+    <p>{{ user.email }}</p>
+    <br><br>
+    <h2>Nylige artikler</h2>
+    <div class="strek"></div>
+</div>
+{% endblock %}

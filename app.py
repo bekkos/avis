@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, url_for, session, request, flash
+from flask import Flask, render_template, redirect, url_for, session, request, flash, Markup
 from flask_sqlalchemy import SQLAlchemy
 import hashlib, datetime
 from werkzeug.utils import secure_filename
@@ -16,6 +16,7 @@ salt = "kfjwej2849"
 
 #DB Config
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://qhgvwsermimino:79f72da5cc5ca92807334413bee6c19ba90739403d7da342c24e8c43ae663468@ec2-54-72-155-238.eu-west-1.compute.amazonaws.com:5432/df4ai5d5tpa1mo'
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite3'
 db = SQLAlchemy(app)
 
 #Database
@@ -37,6 +38,7 @@ class Article(db.Model):
     featured_image_uri = db.Column(db.String)
     article_title = db.Column(db.String)
     article_body = db.Column(db.String)
+    is_published = db.Column(db.Boolean)
 
 
 @app.route('/')
@@ -99,7 +101,7 @@ def cdnControlpanel():
                     urls.append(os.path.join(directory, filename))
                 else:
                     continue
-            return render_template('cdn.controlpanel.html', urls=urls)
+            return render_template('cdn.controlpanel.html', urls=urls, user=User.query.filter_by(id=session['user_id']).first())
 
 
 @app.route("/cdn-editor")
@@ -109,17 +111,42 @@ def cdnEditor():
         return render_template("cdn.editor.html", user=User.query.filter_by(id=session['user_id']).first())
     else:
         return redirect(url_for('cdn'))
-@app.route('/article')
+
+
+@app.route("/cdn-profile")
+def cdnProfile():
+    if request.method == "POST":
+        pass
+    elif request.method == "GET":
+        return render_template('cdn.profile.html', user=User.query.filter_by(id=session['user_id']).first())
+
+@app.route("/article-upload", methods = ['GET', 'POST'])
+def articleUpload():
+    if request.method == "POST":
+        fUrl = request.form.get('featureUrl')
+        title = request.form.get('title')
+        content = request.form.get('content')
+        published = request.form.get('published')
+        if published == "true":
+            published = True
+        else:
+            published = False
+        article = Article(author_id=session.get('user_id'),featured_image_uri=fUrl, article_title=title, article_body=content, is_published=published)
+        db.session.add(article)
+        db.session.commit()
+        return redirect(url_for('cdnEditor'))
+
+
+@app.route('/article', methods=['GET', 'POST'])
 def article():
-    return render_template('article_body.html')
+    if request.method == "GET":
+        aid = request.args.get('aid')
+        article = Article.query.filter_by(id=aid).first()
+    return render_template('article_body.html', article=article, articleContent=Markup(article.article_body))
+
 
 @app.route('/logout')
 def logout():
     session.pop('logged_in')
     session.pop('user_id')
     return redirect(url_for('index'))
-
-
-
-
-

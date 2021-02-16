@@ -1,0 +1,11 @@
+input, label, button {
+    width: 100%;
+    height: 50px;
+    font-size: 2rem;
+}
+
+author_id = db.Column(db.Integer)
+    featured_image_uri = db.Column(db.String)
+    article_title = db.Column(db.String)
+    article_body = db.Column(db.String)
+    is_published = db.Column(db.Boolean)

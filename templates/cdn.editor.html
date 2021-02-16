@@ -5,9 +5,49 @@
 
 {% block body %}
     <textarea name="editor" id="editor"></textarea>
+    <br><br>
+    <input type="text" placeholder="Tittel" id="tittel" required>
+    <br><br>
+    <input type="text" placeholder="Featurebilde-URL" id="url" required>
+    <br><br>
+    <label for="publish">Publiser til forsiden</label>
+    <input id="publish" type="checkbox" value="checked">
+    <br><br>
+    <button onclick="trigger();">Last opp</button>
     <script src="{{ url_for('static', filename='addons/ckeditor/ckeditor.js') }}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
-        CKEDITOR.replace( 'editor' );
+        CKEDITOR.replace('editor');
         CKEDITOR.config.height = document.documentElement.clientHeight-201;
+
+        function trigger() {
+            let data = CKEDITOR.instances.editor.getData();
+            let url = "/article-upload";
+            let tittelInput = document.getElementById('tittel').value;
+            let publishInput;
+            let fUrl = document.getElementById('url').value;
+            
+            if(document.getElementById('publish').checked) {
+                publishInput = true;
+            } else {
+                publishInput = false;
+            }
+            
+            let articleData = {
+                title: tittelInput,
+                featureUrl: fUrl,
+                content: data,
+                published: publishInput
+            }
+
+            console.log(articleData);
+
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: articleData
+            });
+        }
+
     </script>
 {% endblock %}
