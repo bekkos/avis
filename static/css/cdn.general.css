@@ -33,6 +33,7 @@ html, body {
     align-items: center;
     flex-wrap: wrap;
     flex-direction: column;
+    text-align: center;
 }
 
 .profile-preview img {
