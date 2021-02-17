@@ -3,7 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 import hashlib, datetime
 from werkzeug.utils import secure_filename
 import os
-
+os.chdir('/var/www/FlaskApp/App/')
 UPLOAD_FOLDER = './static/images/'
 ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 
@@ -55,9 +55,9 @@ def cdn():
                 if user.passhash == passhash.hexdigest():
                     session['logged_in'] = True
                     session['user_id'] = user.id
-                    activity = UserActivity(user_id=user.id, activity="Logged in to CDN.")
-                    db.session.add(activity)
-                    db.session.commit()
+                    #activity = UserActivity(user_id=user.id, activity="Logged in to CDN.")
+                    #db.session.add(activity)
+                    #db.session.commit()
                     return redirect(url_for('cdnControlpanel'))
                 else:
                     flash('Feil epost/passord.')
@@ -94,7 +94,7 @@ def cdnControlpanel():
 
     elif request.method == 'GET':
         if session.get('logged_in'):
-            directory = r'./static/images/'
+            directory = './static/images/'
             urls = []
             for filename in os.listdir(directory):
                 if filename.endswith(".jpg") or filename.endswith(".png") or filename.endswith(".jpeg"):
