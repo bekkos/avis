@@ -55,9 +55,9 @@ def cdn():
                 if user.passhash == passhash.hexdigest():
                     session['logged_in'] = True
                     session['user_id'] = user.id
-                    #activity = UserActivity(user_id=user.id, activity="Logged in to CDN.")
-                    #db.session.add(activity)
-                    #db.session.commit()
+                    activity = UserActivity(user_id=user.id, activity="Logged in to CDN.")
+                    db.session.add(activity)
+                    db.session.commit()
                     return redirect(url_for('cdnControlpanel'))
                 else:
                     flash('Feil epost/passord.')
