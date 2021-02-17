@@ -122,7 +122,7 @@ def cdnProfile():
 
 @app.route("/article-upload", methods = ['GET', 'POST'])
 def articleUpload():
-    if request.method == "POST":
+    if request.method == "POST" and session.get('logged_in'):
         fUrl = request.form.get('featureUrl')
         title = request.form.get('title')
         content = request.form.get('content')
